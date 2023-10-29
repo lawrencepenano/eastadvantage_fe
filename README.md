@@ -12,4 +12,4 @@ Steps
 3. run npm run dev
 
 Note: Please make sure that this front end is serving under localhost:5173 to avoid cors error same with back end make sure you
-are running itn under localhost:8000
+are running it under localhost:8000
