@@ -1,17 +1,16 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Outlet } from 'react-router-dom'
 import {
   HiMenuAlt2,
 } from "react-icons/hi"
+import { useAuth } from '../../hooks/auth'
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin/dashboard', current: true },
+  // { name: 'Dashboard', href: '/admin/dashboard', current: false },
   { name: 'Users', href: '/admin/users', current: false },
 ]
-const userNavigation = [
-  { name: 'Sign out', href: '#' },
-]
+
 
 export function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -19,7 +18,18 @@ export function classNames(...classes: any) {
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { logout } = useAuth({ middleware: 'auth' })
 
+  const userNavigation = [
+    { name: 'Sign out', href: '#', onclick: logout },
+  ]
+
+
+  useEffect(()=>{
+    // window.location.reload();
+  },[])
+
+  
   return (
     <>
       <div >
@@ -68,7 +78,7 @@ const AdminLayout = () => {
                 <div className="flex-shrink-0 flex items-center px-4">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
+                    src="/public/ea_logo.png"
                     alt="Workflow"
                   />
                 </div>
@@ -102,10 +112,10 @@ const AdminLayout = () => {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
+            <div className="flex items-center flex-shrink-0 px-4 justify-center">
               <img
                 className="h-8 w-auto"
-                src="https://cdn-gmgpd.nitrocdn.com/dxFjptQzqWOQrKOeUkiBeCACtTloqYnP/assets/images/optimized/rev-4f692c0/eastvantage.com/wp-content/uploads/2023/10/EV_LOGO-GREEN-GREY-e1697656723953-300x63.png"
+                src="/public/ea_logo.png"
                 alt="Workflow"
               />
             </div>
@@ -140,15 +150,18 @@ const AdminLayout = () => {
             <div className="flex-1 px-4 flex justify-end">
               <div className="ml-4 flex items-center md:ml-6">
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 relative">
+                <Menu as="div" className="ml-3 relative ">
                   <div>
-                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 circle flex align-center border-2 ">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      {/* <img
                         className="h-8 w-8 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
-                      />
+                      /> */}
+                      <div className='h-8 w-8 flex justify-center items-center'>
+                          A
+                      </div>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -165,7 +178,8 @@ const AdminLayout = () => {
                         <Menu.Item key={item.name}>
                           {({ active } : any) => (
                             <a
-                              href={item.href}
+                              // href={item.href}
+                              onClick={item.onclick}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'

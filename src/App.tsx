@@ -10,11 +10,13 @@ function App() {
     <>
       <Router>  
           <Routes>
+            <Route path='/' element={<Login/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path="/admin" element={<AdminLayout/>}>
                   <Route path='dashboard' element={<Dashboard/>}/>
                   <Route path='users' element={<UserList/>}/>
                   <Route path='users/add' element={<User/>}/>
+                  <Route path='users/:id' element={<User/>}/>
             </Route>
           </Routes>
       </Router> 
