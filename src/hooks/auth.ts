@@ -25,11 +25,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated = "/" } : AuthProp
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
-    const login = async ({ setErrors, setStatus, ...props } : any) => {
+    const login = async ({ setErrors, ...props } : any) => {
         await csrf()
 
         setErrors([])
-        setStatus(null)
 
         axios
             .post('/login', props)

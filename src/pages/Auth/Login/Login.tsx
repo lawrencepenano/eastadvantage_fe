@@ -13,7 +13,6 @@ const initialValue = {
 const Login = () => {
     const [formState, setformState] = useState(initialValue)
     const [errors, setErrors] = useState<any>([])
-    const [setStatus] = useState(null)
     // const navigate = useNavigate();
 
     const handleOnChange =  (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +37,6 @@ const Login = () => {
             email: formState.email,
             password: formState.password,
             setErrors,
-            setStatus,
         })
     }
 
