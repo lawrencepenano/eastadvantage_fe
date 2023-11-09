@@ -33,7 +33,7 @@ const UserList = () => {
         })
         .catch((error: any) => {
             if (error.response.status !== 409) throw error
-            alert("Error")
+            // alert("Error")
         })
     }
 

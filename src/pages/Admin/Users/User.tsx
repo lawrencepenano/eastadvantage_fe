@@ -68,7 +68,7 @@ const User = () => {
         })
         .catch((error: any) => {
             if (error.response.status !== 409) throw error
-            alert("Error")
+            // alert("Error")
         })
     }
     
@@ -104,12 +104,12 @@ const User = () => {
                 'You succesfully update the user!',
                 'success'
               )
-          
+            setErrors([])
         })
         .catch((error: any) => {
             setErrors(error.response.data.errors)
             console.log(error);
-            alert("Error")
+            // alert("Error")
         })
     }
 
